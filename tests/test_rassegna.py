@@ -1,0 +1,184 @@
+"""Test offline: ogni errore incontrato in passato ha qui il suo caso, così non può tornare.
+Esecuzione:  python3 -m unittest discover -s tests -v"""
+import json
+import sys
+import unittest
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
+from rassegna import composizione, parsers, rete  # noqa: E402
+
+RSS = b"""<?xml version="1.0"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
+ xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Sito</title>
+<item><title>Primo articolo</title><link>https://sito.it/a/primo</link><pubDate>Wed, 21 Oct 2026 08:00:00 GMT</pubDate>
+<description>Testo del primo. L'articolo Primo proviene da Sito.</description><media:thumbnail url="https://sito.it/img/foto.jpg"/></item>
+<item><title>Secondo &amp; ultimo</title><link>https://sito.it/a/secondo</link><pubDate>Tue, 20 Oct 2026 08:00:00 GMT</pubDate>
+<content:encoded><![CDATA[<p>Vedi <a href="https://altro.org/x">altro</a></p><img src="https://sito.it/img/b.png">]]></content:encoded></item>
+</channel></rss>"""
+
+
+class TestRete(unittest.TestCase):
+    def test_indirizzi_con_accenti(self):  # errore: UnicodeEncodeError su un'icona con lettera accentata
+        self.assertEqual(rete.normalizza("https://sito.it/ícona/ùno.png?x=è"), "https://sito.it/%C3%ADcona/%C3%B9no.png?x=%C3%A8")
+
+    def test_indirizzo_gia_valido(self):
+        u = "https://www.sito.it/a/b?x=1&y=2"
+        self.assertEqual(rete.normalizza(u), u)
+
+
+class TestFeed(unittest.TestCase):
+    def test_rss_base(self):
+        v = parsers.leggi_feed(RSS)
+        self.assertEqual(len(v), 2)
+        self.assertEqual(v[0]["title"], "Primo articolo")
+        self.assertEqual(v[0]["image"], "https://sito.it/img/foto.jpg")
+        self.assertNotIn("proviene da", v[0]["text"])  # frase standard di WordPress rimossa
+        self.assertEqual(v[1]["title"], "Secondo & ultimo")
+        self.assertEqual(v[1]["image"], "https://sito.it/img/b.png")
+        self.assertIn("https://altro.org/x", v[1]["links"])
+
+    def test_testo_dopo_il_feed(self):  # errore: «junk after document element» (Le Grand Continent)
+        self.assertEqual(len(parsers.leggi_feed(RSS + b"\n<html><body>junk</body></html>")), 2)
+
+    def test_html_sporco_nel_feed(self):  # errore: «mismatched tag» per <link rel=preload> dentro il feed
+        sporco = RSS.replace(b"<channel>", b'<channel><link rel="preload" href="/f.woff2" as="font" crossorigin>')
+        self.assertEqual(len(parsers.leggi_feed(sporco)), 2)
+
+    def test_spazi_prima_dell_xml(self):  # errore: «XML declaration not at start» (podcast Il Post)
+        self.assertEqual(len(parsers.leggi_feed(b"\n\n  " + RSS)), 2)
+
+    def test_riconosce_pagine_html(self):
+        self.assertFalse(parsers.e_feed(b"<!DOCTYPE html><html><head></head></html>"))
+        self.assertTrue(parsers.e_feed(RSS))
+
+    def test_wordpress_json(self):  # soluzione per i feed rotti (Pandora Rivista)
+        dati = json.dumps([{"date_gmt": "2026-10-21T19:10:09", "link": "https://s.it/p/1", "title": {"rendered": "Titolo &#8217;x"},
+                            "excerpt": {"rendered": "<p>Riassunto</p>"}, "content": {"rendered": ""},
+                            "_embedded": {"wp:featuredmedia": [{"source_url": "https://s.it/i.jpg"}]}}]).encode()
+        v = parsers.leggi_feed(dati)
+        self.assertEqual(v[0]["title"], "Titolo ’x")
+        self.assertEqual(v[0]["image"], "https://s.it/i.jpg")
+        self.assertEqual(v[0]["date"].astimezone(timezone.utc).hour, 19)
+
+    def test_archivio_mailchimp(self):  # Areale: lo script restituisce document.write("...")
+        js = ('document.write("<div class=\\"display_archive\\"><div class=\\"campaign\\">17\\/10\\/2026 - <a href=\\"https:\\/\\/x.campaign-archive.com\\/?u=1&id=2\\" '
+              'title=\\"T\\" target=\\"_blank\\">A cosa serve lo sciopero<\\/a><\\/div><\\/div>");').encode()
+        self.assertTrue(parsers.e_feed(js))
+        v = parsers.leggi_feed(js)
+        self.assertEqual((v[0]["title"], v[0]["date"].day, v[0]["date"].month), ("A cosa serve lo sciopero", 17, 10))
+
+
+class TestTesto(unittest.TestCase):
+    def test_caratteri_letti_male(self):  # errore: «Â«stabilitÃ Â»» (Limes)
+        self.assertEqual(parsers.pulisci_html("La Â«stabilitÃ Â» strategica"), "La «stabilità» strategica")
+
+    def test_frasi_standard(self):
+        self.assertEqual(parsers.pulisci_html("Testo. The post Foo appeared first on Bar."), "Testo.")
+        self.assertEqual(parsers.pulisci_html("Testo. L’articolo Foo proviene da Il Tascabile."), "Testo.")
+
+    def test_date_senza_fuso(self):
+        d = parsers.leggi_data("2026-10-21T08:00:00")
+        self.assertEqual(d.utcoffset(), timedelta(hours=2))  # ora italiana (legale a ottobre)
+
+
+class TestPagine(unittest.TestCase):
+    PAG = """<html><head><meta property="og:title" content="Un titolo | Nome Sito"><meta property="og:site_name" content="Nome Sito">
+    <meta property="og:image" content="/img/c.jpg"><script type="application/ld+json">{"@type":"NewsArticle","datePublished":"2026-10-21T07:30:00+02:00"}</script></head></html>"""
+
+    def test_meta_articolo(self):
+        m = parsers.meta_articolo(self.PAG, "https://sito.it/a/x")
+        self.assertEqual(m["title"], "Un titolo")
+        self.assertEqual(m["image"], "https://sito.it/img/c.jpg")
+        self.assertEqual(m["date"].hour, 7)
+
+    def test_link_candidati(self):
+        pag = """<a href="/articoli/la-lettura-profonda-come-infrastruttura">La lettura profonda come infrastruttura culturale</a>
+        <a href="/tag/cultura">Cultura generale del paese</a><a href="/chi-siamo">Chi siamo e cosa facciamo davvero</a>
+        <a href="https://esterno.com/a/un-articolo-lungo-di-prova">Un articolo di un altro sito esterno</a>
+        <a href="/a/un-governo-stabile-un-economia-ferma">Un governo stabile, un’economia ferma</a>"""
+        trovati = [u for u, _ in parsers.link_candidati(pag, "https://sito.it/")]
+        self.assertEqual(len(trovati), 2)
+        self.assertTrue(all("sito.it" in u for u in trovati))
+
+    def test_trova_feed(self):
+        pag = '<link rel="alternate" type="application/rss+xml" href="/feed"><link rel="alternate" type="application/rss+xml" href="/comments/feed">'
+        self.assertEqual(parsers.trova_feed(pag, "https://s.it/"), ["https://s.it/feed"])
+
+
+class TestComposizione(unittest.TestCase):
+    def _voce(self, titolo, testo, fonte, ruolo):
+        return {"title": titolo, "text": testo, "link": "https://x/" + titolo[:8], "date": datetime.now(timezone.utc), "source": fonte, "role": ruolo,
+                "kind": "testo", "image": None, "links": []}
+
+    def test_collegamento_per_parole_comuni(self):
+        n = [self._voce("Sciopero degli autotrasportatori blocca i supermercati del Sud", "Le proteste degli autotrasportatori continuano", "Il Post", "notizie")]
+        c = [self._voce("Perché lo sciopero degli autotrasportatori preoccupa i supermercati", "Analisi dell'effetto sulle forniture dei supermercati", "Valigia Blu", "scritti"),
+             self._voce("La filosofia di Kant oggi", "Un saggio sul pensiero critico", "Il Tascabile", "scritti")]
+        composizione.assegna_uid(n, c)
+        comp = composizione.componi_semplice(n, c, ["Economia e lavoro", "Cultura e idee", "Altro"])
+        self.assertEqual(len(comp.storie[0]["ops"]), 1)
+        self.assertEqual(comp.storie[0]["ops"][0]["source"], "Valigia Blu")
+
+    def test_nessuna_uscita_persa_con_ai(self):  # le notizie non raggruppate dall'AI restano comunque nella pagina
+        n = [self._voce(f"Notizia numero {i}", "", "Il Post", "notizie") for i in range(4)]
+        composizione.assegna_uid(n, [])
+        risposta = {"fatti": [{"fid": "F1", "argomento": "Altro", "titolo": "Unito", "testo": "x", "ids": [0, 1]}], "altre_notizie": [], "contenuti": []}
+        comp = composizione.componi_ai(risposta, n, [], ["Altro"])
+        presenti = {r["uid"] for s in comp.storie for r in s["refs"]}
+        self.assertEqual(presenti, {"n0", "n1", "n2", "n3"})
+
+    def test_risposta_ai_con_valori_strani(self):  # l'AI sbaglia: id fuori scala, argomenti inventati
+        n = [self._voce("Notizia", "", "Il Post", "notizie")]
+        c = [self._voce("Opinione", "", "Valigia Blu", "scritti")]
+        composizione.assegna_uid(n, c)
+        risposta = {"fatti": [{"fid": "F1", "argomento": "Inventato", "titolo": "T", "ids": [0, 99, "x"]}],
+                    "contenuti": [{"id": 1000, "argomento": "Boh", "fatto": "F9"}, {"id": 5000}], "tendenze": [{"titolo": "t", "ids": [0]}]}
+        comp = composizione.componi_ai(risposta, n, c, ["Altro"])
+        self.assertEqual(comp.storie[0]["topic"], "Altro")
+        self.assertEqual(c[0]["topic"], "Altro")
+
+
+class TestMemoria(unittest.TestCase):
+    """Nessuna uscita persa (anche se un giorno salta) e nessuna ripetuta (anche se si rilancia lo stesso giorno)."""
+
+    def _esiti(self, voci):
+        from rassegna.fonti import Esito, Fonte
+        e = Esito(Fonte("S", "https://s.it", "scritti"), voci, "feed")
+        return [e]
+
+    def _v(self, link, ore_fa, adesso):
+        return {"title": link, "link": link, "date": adesso - timedelta(hours=ore_fa), "source": "S", "role": "scritti", "text": ""}
+
+    def test_finestra_e_visti(self):
+        import aggregatore
+        adesso = datetime.now(timezone.utc)
+        voci = [self._v("nuova", 3, adesso), self._v("ieri_vista", 20, adesso), self._v("persa_ieri", 40, adesso), self._v("vecchia", 200, adesso)]
+        stato = {"ultima_esecuzione": "x", "visti": {"ieri_vista": "2026-10-21"}}
+        out = {v["link"] for v in aggregatore.raccogli_voci(self._esiti(voci), stato, adesso, "2026-10-22")}
+        self.assertEqual(out, {"nuova", "persa_ieri"})  # recupera quanto è sfuggito, non ripete il già visto, scarta il troppo vecchio
+
+    def test_rilancio_stesso_giorno(self):
+        import aggregatore
+        adesso = datetime.now(timezone.utc)
+        stato = {"ultima_esecuzione": "x", "visti": {"nuova": "2026-10-22"}}
+        out = aggregatore.raccogli_voci(self._esiti([self._v("nuova", 3, adesso)]), stato, adesso, "2026-10-22")
+        self.assertEqual(len(out), 1)  # già vista OGGI: deve comparire ancora nell'edizione di oggi
+
+    def test_prima_esecuzione_24_ore(self):
+        import aggregatore
+        adesso = datetime.now(timezone.utc)
+        stato = {"ultima_esecuzione": None, "visti": {}}
+        out = aggregatore.raccogli_voci(self._esiti([self._v("a", 3, adesso), self._v("b", 30, adesso)]), stato, adesso, "2026-10-22")
+        self.assertEqual([v["link"] for v in out], ["a"])
+
+    def test_scarta_date_nel_futuro(self):  # es. pagina di un evento con data futura
+        import aggregatore
+        adesso = datetime.now(timezone.utc)
+        out = aggregatore.raccogli_voci(self._esiti([self._v("futuro", -48, adesso)]), {"ultima_esecuzione": None, "visti": {}}, adesso, "2026-10-22")
+        self.assertEqual(out, [])
+
+
+if __name__ == "__main__":
+    unittest.main()

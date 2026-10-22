@@ -1,0 +1,17 @@
+# I TUOI INTERESSI
+# Servono a due cose: evidenziare con «Per te» ciò che ti riguarda e scegliere le fonti nuove da consigliarti.
+# Modificalo quando vuoi: è un testo libero, in italiano.
+
+Mi interessa:
+- Geopolitica e relazioni internazionali: guerra in Ucraina, Medio Oriente, Stati Uniti, Cina, Europa
+- Politica italiana ed europea; fact-checking e disinformazione
+- Scienza, pensiero critico e razionalità; medicina e salute basate su prove
+- Energia, nucleare, clima e transizione ecologica
+- Economia, lavoro, finanza e dati
+- Tecnologia, intelligenza artificiale, cybersicurezza e diritti digitali
+- Filosofia, cultura, letteratura e storia delle idee
+- Diritti civili e società; giornalismo lento e di approfondimento
+
+Non mi interessa:
+- Gossip e cronaca nera sensazionalistica
+- (aggiungi qui ciò che vuoi evitare)

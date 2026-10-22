@@ -4,8 +4,15 @@
 #  Una fonte per riga:   Nome = indirizzo
 #  Accetta il feed RSS/Atom di un sito (o di un podcast, o un canale YouTube).
 #
-#  Opzione a fine riga:   Nome = indirizzo | solo: parola, altra parola
-#      -> tiene solo le uscite il cui titolo contiene una di quelle parole
+#  Opzioni a fine riga (tutte facoltative, separate da |):
+#      | solo: parola, altra parola      tiene solo le uscite il cui titolo contiene una di quelle parole
+#      | alternativa: indirizzo          secondo indirizzo da provare se il primo non risponde
+#      | domini: sito.com               altri siti da considerare parte della fonte (es. la sua newsletter)
+#      | sito: dominio.it               sito da cui prendere il logo, se diverso dall'indirizzo
+#
+#  Per i siti SENZA feed basta scrivere l'indirizzo della pagina principale: il sistema legge gli articoli dalla pagina.
+#  Se una fonte smette di rispondere o blocca i nostri server, il sistema prova da solo altre vie
+#  (indirizzi alternativi, API del sito, lettura delle pagine, Google News) e te lo segnala nella pagina.
 #
 #  Per togliere una fonte: cancella la riga o mettici # davanti.
 #
@@ -39,7 +46,12 @@ Guerre di Rete = https://www.guerredirete.it/feed/
 Pandora Rivista = https://www.pandorarivista.it/wp-json/wp/v2/posts?per_page=20&_embed=wp:featuredmedia
 Lavoce.info = https://lavoce.info/feed/
 Le Grand Continent = https://legrandcontinent.eu/it/feed/
-# Feed non ancora trovato (da cercare): Slow News, Il Mulino, Che Fare, Areale
+
+# Fonti senza feed: lette direttamente dalle loro pagine
+Il Mulino = https://www.rivistailmulino.it
+Che Fare = https://www.che-fare.com
+Slow News = https://www.slow-news.com | domini: theslowjournalist.substack.com
+Areale = https://editorialedomani.us10.list-manage.com/generate-js/?u=dc6df7df0e866f3485077ffd9&fid=27746&show=10 | sito: editorialedomani.it
 
 [argomenti]
 Politica italiana
