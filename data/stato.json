@@ -7,15 +7,15 @@
    "metodo": "feed",
    "oggi": 0,
    "ultimo_articolo": "2026-10-17T06:00:00+02:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Che Fare": {
    "errore": "",
    "fallimenti": 0,
    "metodo": "pagina",
    "oggi": 8,
-   "ultimo_articolo": "2026-10-22T16:45:47.357421+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_articolo": "2026-10-22T17:54:38.883246+00:00",
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Facta": {
    "errore": "",
@@ -23,7 +23,7 @@
    "metodo": "feed",
    "oggi": 3,
    "ultimo_articolo": "2026-10-22T12:40:37+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Guerre di Rete": {
    "errore": "",
@@ -31,7 +31,7 @@
    "metodo": "feed",
    "oggi": 0,
    "ultimo_articolo": "2026-10-21T09:00:00+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "ISPI Online": {
    "errore": "",
@@ -39,23 +39,23 @@
    "metodo": "google-news",
    "oggi": 3,
    "ultimo_articolo": "2026-10-22T16:05:44+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Il Mulino": {
    "errore": "",
    "fallimenti": 0,
    "metodo": "pagina",
    "oggi": 2,
-   "ultimo_articolo": "2026-10-22T16:45:47.121136+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_articolo": "2026-10-22T17:54:35.953111+00:00",
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Il Post": {
    "errore": "",
    "fallimenti": 0,
    "metodo": "feed",
-   "oggi": 60,
-   "ultimo_articolo": "2026-10-22T16:00:05+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "oggi": 64,
+   "ultimo_articolo": "2026-10-22T17:50:42+00:00",
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Il Tascabile": {
    "errore": "",
@@ -63,15 +63,15 @@
    "metodo": "feed",
    "oggi": 1,
    "ultimo_articolo": "2026-10-22T07:09:37+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "InsideOver": {
    "errore": "",
    "fallimenti": 0,
    "metodo": "google-news",
    "oggi": 7,
-   "ultimo_articolo": "2026-10-22T09:58:36+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_articolo": "2026-10-22T14:33:34+00:00",
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Internazionale": {
    "errore": "",
@@ -79,7 +79,7 @@
    "metodo": "feed",
    "oggi": 91,
    "ultimo_articolo": "2026-10-22T15:16:07+02:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Lavoce.info": {
    "errore": "",
@@ -87,15 +87,15 @@
    "metodo": "feed",
    "oggi": 1,
    "ultimo_articolo": "2026-10-22T07:59:44+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Le Grand Continent": {
    "errore": "",
    "fallimenti": 0,
    "metodo": "feed",
-   "oggi": 5,
-   "ultimo_articolo": "2026-10-22T14:36:04+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "oggi": 6,
+   "ultimo_articolo": "2026-10-22T17:18:20+00:00",
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Limes": {
    "errore": "",
@@ -103,7 +103,7 @@
    "metodo": "feed",
    "oggi": 3,
    "ultimo_articolo": "2026-10-22T14:04:00+02:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Lo Spiegone": {
    "errore": "",
@@ -111,7 +111,7 @@
    "metodo": "feed",
    "oggi": 0,
    "ultimo_articolo": "2026-10-21T07:30:00+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Lucy. Sui mondi": {
    "errore": "",
@@ -119,7 +119,7 @@
    "metodo": "feed",
    "oggi": 1,
    "ultimo_articolo": "2026-10-22T04:00:00+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Lucy. Sulla cultura": {
    "errore": "",
@@ -127,7 +127,7 @@
    "metodo": "feed",
    "oggi": 3,
    "ultimo_articolo": "2026-10-22T15:40:00+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "MicroMega": {
    "errore": "",
@@ -135,7 +135,7 @@
    "metodo": "feed",
    "oggi": 3,
    "ultimo_articolo": "2026-10-22T10:50:39+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Pagella Politica": {
    "errore": "",
@@ -143,15 +143,15 @@
    "metodo": "feed",
    "oggi": 3,
    "ultimo_articolo": "2026-10-22T13:05:02+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Pandora Rivista": {
    "errore": "",
    "fallimenti": 0,
    "metodo": "feed",
-   "oggi": 5,
+   "oggi": 4,
    "ultimo_articolo": "2026-10-22T15:08:32+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Scienza in Rete": {
    "errore": "",
@@ -159,7 +159,7 @@
    "metodo": "feed",
    "oggi": 1,
    "ultimo_articolo": "2026-10-22T13:54:51+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Slow News": {
    "errore": "",
@@ -167,7 +167,7 @@
    "metodo": "pagina",
    "oggi": 0,
    "ultimo_articolo": "2026-07-13T08:50:13+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Ti Spiego il Dato": {
    "errore": "",
@@ -175,7 +175,7 @@
    "metodo": "feed",
    "oggi": 0,
    "ultimo_articolo": "2026-10-21T10:34:32+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   },
   "Valigia Blu": {
    "errore": "",
@@ -183,7 +183,7 @@
    "metodo": "feed",
    "oggi": 1,
    "ultimo_articolo": "2026-10-22T06:43:14+00:00",
-   "ultimo_ok": "2026-10-22T18:45:24.845798+02:00"
+   "ultimo_ok": "2026-10-22T19:54:19.821154+02:00"
   }
  },
  "scartati": [],
@@ -336,7 +336,7 @@
   ],
   "generato": "2026-10-22T03:15:49.231858+00:00"
  },
- "ultima_esecuzione": "2026-10-22T18:45:24.845798+02:00",
+ "ultima_esecuzione": "2026-10-22T19:54:19.821154+02:00",
  "visti": {
   "https://it.insideover.com/ambiente/panama-nella-provincia-dellimpero-usa-il-terremoto-riguarda-solo-i-poveri.html": "2026-10-22",
   "https://it.insideover.com/economia/una-nuova-crisi-del-debito-europeo-lo-shock-dei-mercati-travolge-la-francia.html": "2026-10-22",
@@ -347,6 +347,7 @@
   "https://it.insideover.com/media-e-potere/scioperi-proteste-e-manifestazioni-il-comodo-alibi-della-guerra-ibrida-che-non-ce.html": "2026-10-22",
   "https://it.insideover.com/persone/asaad-hassan-al-shaibani-2?view=cover": "2026-10-22",
   "https://it.insideover.com/persone/jose-raul-mulino-3": "2026-10-22",
+  "https://it.insideover.com/politica/brasile-26-miliardi-in-9-mesi-vendendo-soia-e-petrolio-alla-cina-lula-o-bolsonaro-la-realta-non-cambia.html": "2026-10-22",
   "https://it.insideover.com/politica/la-siria-riallaccia-i-rapporti-con-la-libia-e-soprattutto-con-haftar.html": "2026-10-22",
   "https://it.insideover.com/politica/lue-cerca-soldi-per-lucraina-bruxelles-bussa-a-londra-e-ottawa-per-racimolare-fondi.html": "2026-10-22",
   "https://it.insideover.com/politica/macron-a-abu-dhabi-per-il-gasolio-e-intanto-parigi-e-in-coprifuoco.html": "2026-10-22",
@@ -364,6 +365,7 @@
   "https://legrandcontinent.eu/it/2026/10/21/le-front-digital-des-emeutes-en-france-2/": "2026-10-22",
   "https://legrandcontinent.eu/it/2026/10/22/bolsonaro-e-linfluenza-evangelica-uninchiesta/": "2026-10-22",
   "https://legrandcontinent.eu/it/2026/10/22/come-alcuni-attori-stranieri-hanno-alimentato-lindignazione-online-in-merito-alle-manifestazioni-del-17-ottobre-in-francia/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/22/i-francesi-cercano-di-procurarsi-armi-di-autodifesa-in-vista-di-un-nuovo-finesettimana-di-manifestazioni/": "2026-10-22",
   "https://legrandcontinent.eu/it/2026/10/22/la-crisi-del-debito-in-francia-si-sta-aggravando/": "2026-10-22",
   "https://legrandcontinent.eu/it/2026/10/22/manifestazioni-la-tentazione-dellingerenza-straniera/": "2026-10-22",
   "https://legrandcontinent.eu/it/2026/10/22/negli-stati-uniti-lintelligenza-artificiale-sta-prosciugando-il-capitale/": "2026-10-22",
@@ -462,6 +464,7 @@
   "https://www.ilpost.it/2026/10/21/tony-effe-profilo-tonycocazero-sport-ciclismo-corsa/": "2026-10-22",
   "https://www.ilpost.it/2026/10/21/universita-federico-ii-lezioni-online-mancanza-carburante/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/airbnb-pulizie-regole/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/22/alma-shalabayeva-nuovo-processo-cassazione/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/annalisa-cuzzocrea-nuova-direttrice-huffpost-italia/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/barclays-elimina-5-mila-posti-lavoro/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/berlusconi-respinto-ricorso-corte-europea-diritti-delluomo/": "2026-10-22",
@@ -492,9 +495,13 @@
   "https://www.ilpost.it/2026/10/22/peanuts-2026-ottobre-22/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/proteste-autotrasportatori-salvini-meloni-governo/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/proteste-studenti-grecia/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/22/ragazzi-disordini-cosa-accomuna/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/22/rendimento-titoli-francia-massimo-2002/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/sondaggi-elezioni-meta-mandato-stati-uniti/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/spot-ohio-meta-mandato-stati-uniti/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/trenitalia-sospende-cancellazione-carnet-smart-salvini/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/22/umbria-proposta-di-legge-suicidio-assistito-legge-regionale/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/22/uomo-ucciso-da-50-persone-sudafrica/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/viktorovitch-retorica-sofri/": "2026-10-22",
   "https://www.ilpost.it/2026/10/22/vucic-serbia-potere-spiegazione/": "2026-10-22",
   "https://www.ilpost.it/archivio-cookie/": "2026-10-22",
@@ -517,6 +524,7 @@
   "https://www.ilpost.it/flashes/como-united-highlights-champions-league/": "2026-10-22",
   "https://www.ilpost.it/flashes/lega-maranza/": "2026-10-22",
   "https://www.ilpost.it/flashes/percorsi-tour-de-france-2027/": "2026-10-22",
+  "https://www.ilpost.it/newsletter/0a7fdae4637b629c54ef0180d65f3304/": "2026-10-22",
   "https://www.ilpost.it/newsletter/609c92822b94388c2efdff341aa3968c/": "2026-10-22",
   "https://www.ilpost.it/newsletter/95861de9044335279251f75699f3f2b5/": "2026-10-22",
   "https://www.ilpost.it/newsletter/b9ff66e6b9e4b08980e993646cfebbb2/": "2026-10-22",
