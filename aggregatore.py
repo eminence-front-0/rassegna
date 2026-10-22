@@ -44,7 +44,8 @@ def http_get(url, timeout=20, retries=1):
                 with urllib.request.urlopen(req, timeout=timeout) as r:
                     return r.read()
             except urllib.error.URLError as e:
-                if "CERTIFICATE_VERIFY_FAILED" not in str(e):
+                blocked = isinstance(e, urllib.error.HTTPError) and e.code in (403, 429, 503)
+                if "CERTIFICATE_VERIFY_FAILED" not in str(e) and not blocked:
                     raise
                 out = subprocess.run(["curl", "-sSLf", "--max-time", str(timeout), "-A", UA,
                                       "-H", "Accept-Language: it-IT,it;q=0.9", url],
@@ -151,7 +152,30 @@ def good_image(url):
     return url if url.startswith("http") and not IMG_BAD.search(url) else None
 
 
+def parse_wp_json(data):
+    """Articoli dall'API di WordPress (per i siti con il feed RSS rotto)."""
+    items = []
+    for post in json.loads(data):
+        try:
+            date = parse_date(post.get("date_gmt", "") + "+00:00") or parse_date(post["date"])
+            media = (post.get("_embedded") or {}).get("wp:featuredmedia") or [{}]
+            items.append({"title": strip_html(post["title"]["rendered"]), "link": post["link"], "date": date,
+                          "text": strip_html((post.get("excerpt") or {}).get("rendered", ""))[:700],
+                          "image": good_image(media[0].get("source_url"))})
+        except (KeyError, TypeError, AttributeError):
+            continue
+    return items
+
+
 def parse_feed(data):
+    data = data.lstrip()
+    if data[:1] in (b"[", b"{"):
+        return parse_wp_json(data)
+    for end in (b"</rss>", b"</feed>", b"</rdf:RDF>"):  # alcuni siti accodano HTML dopo il feed
+        i = data.rfind(end)
+        if i != -1:
+            data = data[: i + len(end)]
+            break
     try:
         root = ET.fromstring(data.lstrip())
     except ET.ParseError:

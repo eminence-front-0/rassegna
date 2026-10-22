@@ -36,7 +36,7 @@ Lo Spiegone = https://lospiegone.com/feed/
 Ti Spiego il Dato = https://www.tispiegoildato.it/feed
 Scienza in Rete = https://www.scienzainrete.it/rss
 Guerre di Rete = https://www.guerredirete.it/feed/
-Pandora Rivista = https://www.pandorarivista.it/homepage/feed/
+Pandora Rivista = https://www.pandorarivista.it/wp-json/wp/v2/posts?per_page=20&_embed=wp:featuredmedia
 Lavoce.info = https://lavoce.info/feed/
 Le Grand Continent = https://legrandcontinent.eu/it/feed/
 # Feed non ancora trovato (da cercare): Slow News, Il Mulino, Che Fare, Areale
