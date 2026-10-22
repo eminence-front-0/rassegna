@@ -8,7 +8,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
-from rassegna import composizione, parsers, rete  # noqa: E402
+from rassegna import composizione, ia, parsers, rete  # noqa: E402
 
 RSS = b"""<?xml version="1.0"?><rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/"
  xmlns:media="http://search.yahoo.com/mrss/"><channel><title>Sito</title>
@@ -196,6 +196,98 @@ class TestMemoria(unittest.TestCase):
         adesso = datetime.now(timezone.utc)
         out = aggregatore.raccogli_voci(self._esiti([self._v("futuro", -48, adesso)]), {"ultima_esecuzione": None, "visti": {}}, adesso, "2026-10-22")
         self.assertEqual(out, [])
+
+
+class TestAI(unittest.TestCase):
+    """Errori reali di Gemini: 503 «alta domanda», 429 limite di richieste, modello ritirato (404)."""
+
+    def setUp(self):
+        import os
+        os.environ["GEMINI_API_KEY"] = "x"
+        self._orig = (ia._una, ia.modelli, ia.PAUSE, ia.time.sleep)
+        ia.modelli = lambda: ["m1", "m2", "m3"]
+        ia.PAUSE = (0, 0)
+        ia.time.sleep = lambda s: None
+
+    def tearDown(self):
+        ia._una, ia.modelli, ia.PAUSE, ia.time.sleep = self._orig
+
+    @staticmethod
+    def _ok(testo='{"ok": true}'):
+        return {"candidates": [{"content": {"parts": [{"text": testo}]}}]}
+
+    def test_sovraccarico_passa_al_modello_successivo(self):
+        chiamate = []
+
+        def finta(modello, corpo):
+            chiamate.append(modello)
+            if modello == "m1":
+                raise rete.ErroreRete("HTTP 503", codice=503)
+            return self._ok()
+        ia._una = finta
+        self.assertEqual(ia.chiedi("p"), {"ok": True})
+        self.assertEqual(ia.ultimo_modello, "m2")
+        self.assertEqual(chiamate.count("m1"), 3)  # riprova con pazienza prima di cambiare modello
+
+    def test_modello_ritirato_si_salta_subito(self):
+        chiamate = []
+
+        def finta(modello, corpo):
+            chiamate.append(modello)
+            if modello == "m1":
+                raise rete.ErroreRete("HTTP 404", codice=404)
+            return self._ok()
+        ia._una = finta
+        ia.chiedi("p")
+        self.assertEqual(chiamate, ["m1", "m2"])
+
+    def test_tutti_falliscono(self):
+        def finta(modello, corpo):
+            raise rete.ErroreRete("HTTP 429: quota", codice=429)
+        ia._una = finta
+        with self.assertRaises(rete.ErroreRete):
+            ia.chiedi("p")
+
+    def test_risposta_non_json_si_riprova_con_altro_modello(self):
+        ia._una = lambda m, c: self._ok("non è json") if m == "m1" else self._ok()
+        self.assertEqual(ia.chiedi("p"), {"ok": True})
+
+
+class TestMemoriaAI(unittest.TestCase):
+    def _v(self, titolo, ruolo, fonte="Il Post", testo=""):
+        return {"title": titolo, "text": testo, "link": "https://x/" + titolo.replace(" ", "-"), "date": datetime.now(timezone.utc), "source": fonte,
+                "role": ruolo, "kind": "testo", "image": None, "links": []}
+
+    def test_ripresa_dalla_memoria(self):
+        import os
+        import tempfile
+        os.environ["RASSEGNA_AI_CACHE"] = os.path.join(tempfile.mkdtemp(), "cache.json")
+        n = [self._v("Sciopero camionisti", "notizie"), self._v("Altra notizia", "notizie")]
+        c = [self._v("Perché i camionisti scioperano", "scritti", "Valigia Blu"), self._v("Saggio generale", "scritti", "Il Tascabile")]
+        composizione.assegna_uid(n, c)
+        risposta = {"editoriale": "Il punto.", "fatti": [{"fid": "F1", "argomento": "Economia e lavoro", "titolo": "Sciopero", "testo": "T", "ids": [0], "per_te": True}],
+                    "altre_notizie": [{"id": 1, "argomento": "Cronaca"}],
+                    "contenuti": [{"id": 1000, "argomento": "Economia e lavoro", "fatto": "F1", "sintesi": "S1"}, {"id": 1001, "argomento": "Cultura e idee", "fatto": None, "sintesi": "S2"}],
+                    "tendenze": [{"titolo": "Sciopero", "ids": [0, 1000]}]}
+        arg = ["Economia e lavoro", "Cronaca", "Cultura e idee", "Altro"]
+        comp = composizione.componi_ai(risposta, n, c, arg)
+        composizione.salva_cache(comp, n, c)
+        # aggiornamento successivo: stesse uscite + una notizia e un'opinione nuove; l'AI non risponde
+        n2 = [self._v("Sciopero camionisti", "notizie"), self._v("Altra notizia", "notizie"), self._v("Notizia arrivata dopo", "notizie")]
+        c2 = [self._v("Perché i camionisti scioperano", "scritti", "Valigia Blu"), self._v("Saggio generale", "scritti", "Il Tascabile"),
+              self._v("Opinione nuova sulla cultura del libro", "scritti", "Lucy")]
+        composizione.assegna_uid(n2, c2)
+        cache = composizione.carica_cache()
+        self.assertIsNotNone(cache)
+        rip = composizione.componi_da_cache(cache, n2, c2, arg)
+        presenti = {r["link"] for s in rip.storie for r in s["refs"]}
+        self.assertEqual(presenti, {x["link"] for x in n2})                 # nessuna notizia persa
+        self.assertEqual(rip.editoriale, "Il punto.")
+        principale = next(s for s in rip.storie if not s["minor"])
+        self.assertEqual([o["summary"] for o in principale["ops"]], ["S1"])  # collegamento e sintesi dell'AI mantenuti
+        self.assertEqual(c2[1]["topic"], "Cultura e idee")
+        self.assertIn("topic", c2[2])                                         # l'opinione nuova ha comunque un argomento
+        self.assertEqual(len(rip.tendenze), 1)
 
 
 if __name__ == "__main__":

@@ -56,7 +56,7 @@ jobs:
         run: |
           git config user.name "rassegna-bot"
           git config user.email "rassegna-bot@users.noreply.github.com"
-          git add docs/archivio docs/logos data/stato.json
+          git add docs/archivio docs/logos data/stato.json data/ai_cache.json
           git diff --cached --quiet || git commit -m "Edizione del $(TZ=Europe/Rome date +%F)"
           git pull --rebase -q origin main || true
           git push

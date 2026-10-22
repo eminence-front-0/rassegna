@@ -96,7 +96,7 @@ def main():
     notizie = [v for v in voci if v["role"] == "notizie"]
     contenuti = [v for v in voci if v["role"] != "notizie"]
 
-    comp = composizione.componi(notizie, contenuti, argomenti, interessi, feedback.riassunto(stato))
+    comp = composizione.componi(notizie, contenuti, argomenti, interessi, feedback.riassunto(stato), salva=persisti)
 
     if args.consigli or suggerimenti.da_aggiornare(stato):
         try:

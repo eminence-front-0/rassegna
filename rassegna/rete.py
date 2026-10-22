@@ -77,16 +77,21 @@ def _curl(url, timeout, headers, data=None, metodo=None):
     return body
 
 
-def scarica(url, timeout=20, tentativi=4, headers=None, data=None, metodo=None):
-    """Scarica un indirizzo e ritorna i byte. Solleva ErroreRete se non riesce."""
+def scarica(url, timeout=20, tentativi=4, headers=None, data=None, metodo=None, ripiego=True):
+    """Scarica un indirizzo e ritorna i byte. Solleva ErroreRete se non riesce.
+    ripiego=False: per le API, dove riprovare con un altro metodo non serve e peggiora i limiti di richieste."""
     url = normalizza(url)
     ultimo = None
     for n in range(tentativi):
         try:
             return _urllib(url, timeout, headers, data, metodo)
         except urllib.error.HTTPError as e:
-            ultimo = ErroreRete(f"HTTP {e.code}", codice=e.code, permanente=e.code in (404, 410))
-            if ultimo.permanente:
+            try:
+                corpo = e.read().decode("utf-8", "ignore")[:220].replace("\n", " ")
+            except Exception:  # noqa: BLE001
+                corpo = ""
+            ultimo = ErroreRete(f"HTTP {e.code}" + (f": {corpo}" if corpo and not ripiego else ""), codice=e.code, permanente=e.code in (404, 410))
+            if ultimo.permanente or not ripiego:
                 raise ultimo
             if e.code in (401, 403, 429, 503):  # blocco: un'altra impronta di connessione può passare
                 try:

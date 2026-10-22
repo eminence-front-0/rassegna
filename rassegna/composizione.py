@@ -1,9 +1,12 @@
 """Dai feed alla pagina: fatti (storie), opinioni collegate, argomenti, editoriale e tendenze."""
 import json
+import os
 import re
 from dataclasses import dataclass, field
+from datetime import datetime, timedelta, timezone
 
 from . import ia
+from .config import RADICE
 from .parsers import accorcia
 
 PAROLE = {
@@ -35,6 +38,7 @@ class Composizione:
     tendenze: list = field(default_factory=list)   # [{titolo, descrizione, uids}]
     con_ai: bool = False
     nota: str = ""
+    modello: str = ""
 
 
 def indovina_argomento(testo, ammessi=None):
@@ -185,15 +189,119 @@ def componi_ai(risposta, notizie, contenuti, argomenti):
     return Composizione(storie=storie, editoriale=str(risposta.get("editoriale", "")).strip(), tendenze=tendenze, con_ai=True)
 
 
-def componi(notizie, contenuti, argomenti, interessi="", preferenze=""):
+# ---------- memoria dell'ultima composizione riuscita ----------
+# Se l'AI non risponde (sovraccarico, limiti di richieste) non si torna di colpo alle parole chiave:
+# le uscite già classificate dall'AI nell'edizione precedente mantengono argomento, sintesi e collegamenti.
+
+PERCORSO_CACHE = RADICE / "data" / "ai_cache.json"
+VALIDITA_CACHE = timedelta(hours=36)
+
+
+def _percorso():
+    return type(PERCORSO_CACHE)(os.environ.get("RASSEGNA_AI_CACHE", PERCORSO_CACHE))
+
+
+def salva_cache(comp, notizie, contenuti):
+    per_uid = {n["uid"]: n for n in notizie} | {c["uid"]: c for c in contenuti}
+    maggiori = [s for s in comp.storie if not s["minor"]]
+    indice = {id(s): i for i, s in enumerate(maggiori)}
+    collegato = {id(o): indice[id(s)] for s in maggiori for o in s["ops"]}
+    cache = {
+        "ts": datetime.now(timezone.utc).isoformat(), "modello": ia.ultimo_modello, "editoriale": comp.editoriale,
+        "tendenze": [{"titolo": t["titolo"], "descrizione": t["descrizione"], "links": [per_uid[u]["link"] for u in t["uids"] if u in per_uid]} for t in comp.tendenze],
+        "fatti": [{"argomento": s["topic"], "titolo": s["titolo"], "testo": s["testo"], "per_te": s["per_te"], "links": [r["link"] for r in s["refs"]]} for s in maggiori],
+        "notizie": {s["refs"][0]["link"]: s["topic"] for s in comp.storie if s["minor"] and s["refs"]},
+        "contenuti": {c["link"]: {"a": c["topic"], "s": c.get("summary", ""), "p": bool(c.get("per_te")), "f": collegato.get(id(c))} for c in contenuti},
+    }
+    _percorso().parent.mkdir(exist_ok=True)
+    _percorso().write_text(json.dumps(cache, ensure_ascii=False), encoding="utf-8")
+
+
+def carica_cache():
+    try:
+        c = json.loads(_percorso().read_text(encoding="utf-8"))
+        if datetime.now(timezone.utc) - datetime.fromisoformat(c["ts"]) <= VALIDITA_CACHE:
+            return c
+    except (OSError, ValueError, KeyError):
+        pass
+    return None
+
+
+def componi_da_cache(cache, notizie, contenuti, argomenti):
+    """Ricostruisce la pagina con le classificazioni dell'AI già note; le uscite nuove vanno per parole chiave."""
+    ammessi = set(argomenti)
+    ok = lambda t: t if t in ammessi else indovina_argomento(str(t), ammessi)  # noqa: E731
+    per_link = {n["link"]: n for n in notizie}
+    storie, per_indice, usate = [], {}, set()
+    for i, f in enumerate(cache.get("fatti", [])):
+        refs = [per_link[l] for l in f.get("links", []) if l in per_link]
+        if not refs:
+            continue
+        st = storia(f"s{len(storie)}", ok(f.get("argomento", "")), f.get("titolo", ""), f.get("testo", ""), refs, bool(f.get("per_te")))
+        storie.append(st)
+        per_indice[i] = st
+        usate.update(r["link"] for r in refs)
+    nuove = [n for n in notizie if n["link"] not in usate and not RUBRICHE.match(n["title"])]
+    for n in nuove:  # uscite arrivate dopo l'ultima composizione dell'AI
+        st = storia(f"s{len(storie)}", ok(cache.get("notizie", {}).get(n["link"]) or indovina_argomento(n["title"] + " " + n["text"], ammessi)),
+                    n["title"], accorcia(n["text"] if n["text"].lower() != n["title"].lower() else "", 240), [n])
+        st["minor"] = True
+        storie.append(st)
+    token_storie = [(st, token(st["titolo"] + " " + st["testo"])) for st in storie]
+    for c in contenuti:
+        info = cache.get("contenuti", {}).get(c["link"])
+        if info:
+            c["summary"], c["per_te"], c["topic"] = info.get("s") or accorcia(c["text"], 200), bool(info.get("p")), ok(info.get("a", ""))
+            st = per_indice.get(info.get("f"))
+            if st:
+                st["ops"].append(c)
+                c["topic"] = st["topic"]
+            continue
+        c["summary"], c["per_te"] = accorcia(c["text"], 200), False
+        ct = token(c["title"] + " " + c["text"])
+        migliore, punti = None, 0
+        for st, tk in token_storie:
+            p = len(ct & tk)
+            if p > punti:
+                migliore, punti = st, p
+        if migliore is not None and punti >= 3:
+            migliore["ops"].append(c)
+            c["topic"] = migliore["topic"]
+        else:
+            c["topic"] = indovina_argomento(c["title"] + " " + c["text"], ammessi)
+    for st in storie:
+        st["ops"].sort(key=lambda o: o["date"], reverse=True)
+        st["per_te"] = st["per_te"] or any(o["per_te"] for o in st["ops"])
+    link_uid = {n["link"]: n["uid"] for n in notizie} | {c["link"]: c["uid"] for c in contenuti}
+    tendenze = []
+    for t in cache.get("tendenze", []):
+        uids = sorted({link_uid[l] for l in t.get("links", []) if l in link_uid})
+        if len(uids) >= 2:
+            tendenze.append({"titolo": t["titolo"], "descrizione": t.get("descrizione", ""), "uids": uids})
+    return Composizione(storie=storie, editoriale=cache.get("editoriale", ""), tendenze=tendenze, con_ai=True)
+
+
+def componi(notizie, contenuti, argomenti, interessi="", preferenze="", salva=False):
     assegna_uid(notizie, contenuti)
     if ia.disponibile() and (notizie or contenuti):
         try:
             risposta = ia.chiedi(prompt_giornaliero(notizie, contenuti, argomenti, interessi, preferenze), nome="giornaliera")
-            return componi_ai(risposta, notizie, contenuti, argomenti)
+            comp = componi_ai(risposta, notizie, contenuti, argomenti)
+            comp.modello = ia.ultimo_modello
+            if salva:
+                salva_cache(comp, notizie, contenuti)
+            return comp
         except Exception as e:  # noqa: BLE001  l'AI non deve mai impedire l'uscita della pagina
+            motivo = f"{type(e).__name__}: {str(e)[:200]}"
+            cache = carica_cache()
+            if cache:
+                comp = componi_da_cache(cache, notizie, contenuti, argomenti)
+                comp.nota = ("L'AI non ha risposto in questo aggiornamento: uso la composizione dell'edizione precedente per le uscite già note "
+                             f"e le parole chiave per le nuove. Riproverò al prossimo aggiornamento. ({motivo})")
+                comp.modello = "memoria"
+                return comp
             comp = componi_semplice(notizie, contenuti, argomenti)
-            comp.nota = f"AI non disponibile ({type(e).__name__}: {str(e)[:120]}): pagina composta senza AI."
+            comp.nota = f"AI non disponibile ({motivo}): pagina composta senza AI."
             return comp
     comp = componi_semplice(notizie, contenuti, argomenti)
     comp.nota = "Modalità senza AI (manca GEMINI_API_KEY): argomenti e collegamenti per parole chiave, fatti senza riassunto."

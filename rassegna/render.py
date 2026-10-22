@@ -286,7 +286,7 @@ def pagina(ctx: Contesto):
     corpo.append(f'<footer class="foot"><span>Generata il {a:%d/%m/%Y} alle {a:%H:%M}</span><a href="__ARCHIVIO__">Edizioni precedenti</a>'
                  f'<a href="https://github.com/{E(ctx.repo)}/edit/main/sources.txt">Modifica le fonti</a>'
                  f'<a href="https://github.com/{E(ctx.repo)}/edit/main/interessi.txt">Modifica i tuoi interessi</a>'
-                 f'<span>{"Sintesi con AI" if comp.con_ai else "Senza AI"}</span></footer>')
+                 f'<span>{("Sintesi con AI" + (f" ({E(comp.modello)})" if comp.modello else "")) if comp.con_ai else "Senza AI"}</span></footer>')
 
     css = (RADICE / "assets" / "stile.css").read_text(encoding="utf-8")
     js = (RADICE / "assets" / "app.js").read_text(encoding="utf-8")
