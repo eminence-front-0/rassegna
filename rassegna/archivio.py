@@ -2,7 +2,7 @@
 from datetime import datetime
 
 from .config import RADICE
-from .render import GIORNI, MESI
+from .render import FAVICON, GIORNI, MESI
 
 DOCS = RADICE / "docs"
 
@@ -27,7 +27,7 @@ def salva(pagina, adesso):
         righe.append(f'<li><a href="{f.name}">{GIORNI[d.weekday()].capitalize()} {d.day} {MESI[d.month - 1]} {d.year}<span>{d:%d/%m/%Y}</span></a></li>')
     (cartella / "index.html").write_text(
         '<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-        '<title>Edizioni precedenti — La Rassegna</title><meta name="color-scheme" content="light">'
+        '<title>Edizioni precedenti — La Rassegna</title><meta name="color-scheme" content="light">' + FAVICON +
         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">'
         f'<style>{CSS}</style></head><body><main><a href="../"><span class="mark">R</span><b>La Rassegna</b></a><h1>Edizioni precedenti</h1>'
         f'<p>{len(righe)} edizioni conservate · <a href="../">← Torna all\'ultima edizione</a></p><ul>{"".join(righe)}</ul></main></body></html>',

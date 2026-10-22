@@ -3,6 +3,7 @@ import html
 import json
 import re
 import zlib
+from urllib.parse import quote
 from dataclasses import dataclass, field
 from datetime import datetime
 
@@ -14,6 +15,11 @@ E = lambda s: html.escape(str(s), quote=True)  # noqa: E731
 MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio", "agosto",
         "settembre", "ottobre", "novembre", "dicembre"]
 GIORNI = ["lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato", "domenica"]
+LOGO_SVG = ("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'>"
+            "<stop offset='0' stop-color='#4f46e5'/><stop offset='.55' stop-color='#7c3aed'/><stop offset='1' stop-color='#ec4899'/></linearGradient></defs>"
+            "<rect width='64' height='64' rx='18' fill='url(#g)'/><path d='M23 48V16h12a9 9 0 0 1 0 18H23M34 34l9 14' fill='none' stroke='white' "
+            "stroke-width='7' stroke-linecap='round' stroke-linejoin='round'/></svg>")
+FAVICON = '<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,' + quote(LOGO_SVG) + '">'
 PER_ARGOMENTO = 6  # oltre questa soglia i fatti minori diventano righe compatte
 
 ICONE = {
@@ -171,6 +177,7 @@ def pagina(ctx: Contesto):
     n_fatti = sum(1 for s in comp.storie if not s["minor"])
     a = ctx.adesso.astimezone()
     data_txt = f"{GIORNI[a.weekday()]} {a.day} {MESI[a.month - 1]}"
+    saluto = "Buongiorno" if a.hour < 13 else ("Buon pomeriggio" if a.hour < 18 else "Buonasera")
     ha_per_te = any(s.get("per_te") for s in comp.storie) or any(c.get("per_te") for c in ctx.contenuti)
 
     cfg = {"repo": ctx.repo, "edizione": a.strftime("%Y-%m-%d"),
@@ -185,8 +192,8 @@ def pagina(ctx: Contesto):
         tendenze = ('<div class="trends"><span class="lbl">Di cosa si parla</span>' + "".join(
             f'<button class="trend" data-trend="t{i}">{E(t["titolo"])}<i>{len(t["uids"])}</i></button>' for i, t in enumerate(comp.tendenze)) + "</div>")
     hero = (f'<section class="hero"><div class="wrap hero-in"><div><span class="pill"><span class="dot"></span>Edizione di {E(data_txt)} · aggiornata alle {a:%H:%M}</span>'
-            f'<h1>Buongiorno. Ecco <em>cosa conta</em> oggi.</h1><p class="lede">{E(comp.editoriale or "")}</p>{tendenze}</div>'
-            f'<div class="stats"><div class="stat"><b class="num">{len(ctx.notizie) + len(ctx.contenuti)}</b><span>uscite nelle ultime {ctx.ore} ore</span></div>'
+            f'<h1>{saluto}. Ecco <em>cosa conta</em> oggi.</h1><p class="lede">{E(comp.editoriale or "")}</p>{tendenze}</div>'
+            f'<div class="stats"><div class="stat"><b class="num">{len(ctx.notizie) + len(ctx.contenuti)}</b><span>uscite di oggi</span></div>'
             f'<div class="stat"><b class="num">{attive}<small style="font-size:16px;color:var(--mut2);font-weight:600">/{len(ctx.fonti)}</small></b><span>fonti con novità</span></div>'
             f'<div class="stat f"><b class="num">{n_fatti}</b><span>fatti ricostruiti</span></div>'
             f'<div class="stat o"><b class="num">{len(ctx.contenuti)}</b><span>opinioni e analisi</span></div></div></div></section>')
@@ -284,7 +291,7 @@ def pagina(ctx: Contesto):
     css = (RADICE / "assets" / "stile.css").read_text(encoding="utf-8")
     js = (RADICE / "assets" / "app.js").read_text(encoding="utf-8")
     return (f'<!doctype html><html lang="it"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">'
-            f'<title>La Rassegna — {a:%d/%m/%Y}</title><meta name="color-scheme" content="light">'
+            f'<title>La Rassegna — {a:%d/%m/%Y}</title><meta name="color-scheme" content="light">{FAVICON}'
             '<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
             '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">'
             f'<style>{css}</style></head><body>{nav}{hero}{barra}<main class="wrap">{"".join(corpo)}</main><div class="toast" role="status"></div>'

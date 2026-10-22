@@ -1,6 +1,6 @@
 # La Rassegna
 
-Ogni mattina legge le tue fonti e prepara una pagina: **i fatti** (in blu), **le opinioni che li commentano** (in arancio), divisi per argomento, con le fonti nuove da provare.
+Quattro volte al giorno (08:00, 13:00, 18:00, 23:00, ora italiana) legge le tue fonti e aggiorna una pagina: **i fatti** (in blu), **le opinioni che li commentano** (in arancio), divisi per argomento, con le fonti nuove da provare.
 
 Pagina: <https://eminence-front-0.github.io/rassegna/> · Archivio: `/archivio/`
 

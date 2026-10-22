@@ -2,7 +2,9 @@ name: Rassegna del mattino
 
 on:
   schedule:
-    - cron: "0 3 * * *"   # 03:00 UTC = 5:00 (ora legale) / 4:00 (ora solare) in Italia
+    # Obiettivo: 08:00, 13:00, 18:00 e 23:00 ORA ITALIANA. GitHub ragiona in UTC e l'Italia cambia ora due volte l'anno,
+    # quindi si parte a entrambe le ore possibili (legale e solare) e il primo passo tiene solo quella giusta.
+    - cron: "10 6,7,11,12,16,17,21,22 * * *"
   workflow_dispatch:       # permette di lanciarla a mano dal sito di GitHub
 
 permissions:
@@ -16,7 +18,20 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  controlla:
+    runs-on: ubuntu-latest
+    outputs:
+      vai: ${{ steps.ora.outputs.vai }}
+    steps:
+      - id: ora
+        run: |
+          H=$(TZ=Europe/Rome date +%H)
+          echo "Ora italiana: $H"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || echo "08 13 18 23" | grep -qw "$H"; then echo "vai=true" >> "$GITHUB_OUTPUT"; else echo "vai=false" >> "$GITHUB_OUTPUT"; fi
+
   genera:
+    needs: controlla
+    if: needs.controlla.outputs.vai == 'true'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     environment:
