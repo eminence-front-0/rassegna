@@ -18,13 +18,23 @@ ORE = int(os.environ.get("ORE", "24"))
 REPO = os.environ.get("GITHUB_REPOSITORY", "eminence-front-0/rassegna")
 
 
-def raccogli_voci(esiti, stato, adesso, oggi):
-    """Applica la finestra temporale e la memoria: nessuna uscita persa, nessuna ripetuta."""
+def raccogli_voci(esiti, stato, adesso, oggi, scartate=None):
+    """Applica la finestra temporale e la memoria: nessuna uscita persa, nessuna ripetuta.
+    `scartate` raccoglie le uscite senza data che non mostriamo ma che vanno ricordate come già viste."""
     ha_storia = bool(stato["ultima_esecuzione"])
     finestra = timedelta(hours=72 if ha_storia else ORE)
     viste, voci = set(), []
     for e in esiti:
+        prima_volta = not stato.get("salute", {}).get(e.fonte.nome, {}).get("ultimo_ok")
+        incerte = 0
         for v in e.voci:
+            if v.get("data_incerta"):
+                # fonti che non dichiarano la data: all'inizio solo le prime dell'elenco (le più recenti), poi solo le nuove
+                incerte += 1
+                if incerte > (3 if prima_volta else 8):
+                    if scartate is not None:
+                        scartate.append(v["link"])
+                    continue
             if v["date"] > adesso + timedelta(hours=6) or v["date"] < adesso - finestra:
                 continue
             if ha_storia:
@@ -70,7 +80,8 @@ def main():
         print(f"  preferenze nuove: {nuove_pref}")
 
     esiti = fonti.scarica_tutte(elenco, visti=frozenset(l for l, d in stato["visti"].items() if d != oggi))
-    voci = raccogli_voci(esiti, stato, adesso, oggi)
+    scartate = []
+    voci = raccogli_voci(esiti, stato, adesso, oggi, scartate)
     if not voci and any(not e.ok for e in esiti):
         print("Nessuna uscita e alcune fonti irraggiungibili: non sostituisco la pagina esistente.", file=sys.stderr)
         for e in esiti:
@@ -112,6 +123,8 @@ def main():
     if persisti:
         for v in voci:
             stato["visti"].setdefault(v["link"], oggi)
+        for link in scartate:
+            stato["visti"].setdefault(link, oggi)
         stato["ultima_esecuzione"] = adesso.isoformat()
         memoria.salva(stato, oggi)
 

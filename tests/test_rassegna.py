@@ -173,6 +173,17 @@ class TestMemoria(unittest.TestCase):
         out = aggregatore.raccogli_voci(self._esiti([self._v("a", 3, adesso), self._v("b", 30, adesso)]), stato, adesso, "2026-10-22")
         self.assertEqual([v["link"] for v in out], ["a"])
 
+    def test_fonte_senza_date_non_inonda(self):  # Che Fare: nessuna data dichiarata, 22 articoli in elenco
+        import aggregatore
+        from rassegna.fonti import Esito, Fonte
+        adesso = datetime.now(timezone.utc)
+        voci = [{**self._v(f"a{i}", 0, adesso), "data_incerta": True} for i in range(22)]
+        e = Esito(Fonte("CF", "https://cf.it", "scritti"), voci, "pagina")
+        scartate = []
+        out = aggregatore.raccogli_voci([e], {"ultima_esecuzione": None, "visti": {}, "salute": {}}, adesso, "2026-10-22", scartate)
+        self.assertEqual(len(out), 3)          # solo le prime 3 dell'elenco
+        self.assertEqual(len(scartate), 19)    # le altre vengono ricordate, così domani non compaiono
+
     def test_scarta_date_nel_futuro(self):  # es. pagina di un evento con data futura
         import aggregatore
         adesso = datetime.now(timezone.utc)
