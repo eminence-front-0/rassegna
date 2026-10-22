@@ -1,0 +1,45 @@
+name: Rassegna del mattino
+
+on:
+  schedule:
+    - cron: "0 3 * * *"   # 03:00 UTC = 4:00 (ora solare) / 5:00 (ora legale) in Italia
+  workflow_dispatch:       # permette di lanciarla a mano dal sito di GitHub
+
+permissions:
+  contents: write          # per conservare le edizioni passate nel repository
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  genera:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Genera la pagina
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          TZ: Europe/Rome
+        run: python3 aggregatore.py
+      - name: Conserva l'edizione di oggi
+        run: |
+          git config user.name "rassegna-bot"
+          git config user.email "rassegna-bot@users.noreply.github.com"
+          git add docs/archivio
+          git diff --cached --quiet || git commit -m "Edizione del $(TZ=Europe/Rome date +%F)"
+          git push
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+      - id: deploy
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,148 @@
+# ============================================================================
+#  FONTI DELL'AGGREGATORE
+# ============================================================================
+#  Una fonte per riga:   Nome = indirizzo
+#  Accetta il feed RSS/Atom di un sito (o di un podcast, o un canale YouTube).
+#
+#  Opzione a fine riga:   Nome = indirizzo | solo: parola, altra parola
+#      -> tiene solo le uscite il cui titolo contiene una di quelle parole
+#
+#  Per togliere una fonte: cancella la riga o mettici # davanti.
+#
+#  Le sezioni [tra parentesi quadre] dicono cosa fare con le fonti:
+#    [notizie]            fatti del giorno (rassegna neutra)
+#    [scritti]            riviste e siti di approfondimento e opinione
+#    [argomenti]          elenco degli argomenti con cui ordinare la pagina
+#  Sezioni già pronte ma spente (vedi in fondo): [podcast] [selezione]
+#    [canali: Etichetta] [voci]
+# ============================================================================
+
+[notizie]
+Il Post = https://www.ilpost.it/feed
+Internazionale = https://www.internazionale.it/sitemaps/rss.xml
+
+[scritti]
+Pagella Politica = https://pagellapolitica.it/feed.xml
+Facta = https://facta.news/feed.xml
+Il Tascabile = https://www.iltascabile.com/feed/
+Valigia Blu = https://www.valigiablu.it/feed/
+Lucy. Sulla cultura = https://www.lucysullacultura.com/feed
+Lucy. Sui mondi = https://www.lucysuimondi.com/feed
+InsideOver = https://it.insideover.com/feed
+MicroMega = https://www.micromega.net/feed
+Limes = https://www.limesonline.com/rss
+ISPI Online = https://www.ispionline.it/it/feed
+Lo Spiegone = https://lospiegone.com/feed/
+Ti Spiego il Dato = https://www.tispiegoildato.it/feed
+Scienza in Rete = https://www.scienzainrete.it/rss
+Guerre di Rete = https://www.guerredirete.it/feed/
+Pandora Rivista = https://www.pandorarivista.it/homepage/feed/
+Lavoce.info = https://lavoce.info/feed/
+Le Grand Continent = https://legrandcontinent.eu/it/feed/
+# Feed non ancora trovato (da cercare): Slow News, Il Mulino, Che Fare, Areale
+
+[argomenti]
+Politica italiana
+Europa e Unione Europea
+Esteri e geopolitica
+Guerra in Ucraina
+Medio Oriente
+Stati Uniti
+Economia e lavoro
+Diritti e società
+Scienza e salute
+Tecnologia e AI
+Cultura e idee
+Media e informazione
+Ambiente ed energia
+Cronaca
+Sport
+Altro
+
+
+# ============================================================================
+#  SPENTE PER ORA: YouTube e podcast.
+#  Per riaccenderle togli il # davanti a ogni riga, intestazioni comprese.
+# ============================================================================
+
+# [podcast]
+# The Essential = https://feeds.megaphone.fm/GLT8247080596
+# Globally = https://feeds.megaphone.fm/ISM5684255413
+# Non hanno un amico = https://feeds.megaphone.fm/BCS3841029693
+# Stories = https://feeds.megaphone.fm/GLT7160542006
+
+# [selezione]
+# Breaking Italy = https://www.youtube.com/channel/UC4V3oCikXeSqYQr0hBMARwg
+# Bazar Atomico = https://www.youtube.com/channel/UCJaXKWR5D0Mftqo6A1E9aQg
+# PDR - Il Podcast di Daniele Rielli = https://www.youtube.com/channel/UCkwrzDcqyKYS4mU7f0Rufrg
+# Jeantoneria Podcast = https://www.youtube.com/channel/UCAM_V29aapThoNQ_22-un1g
+# Pulp Podcast = https://www.youtube.com/channel/UCY99TnBJ8xyat2lpeN_hcEA
+# Il Grande Gioco (San Marino RTV) = https://www.youtube.com/channel/UCUpQzPghB8Rjk5D82UXqq-g | solo: Il Grande Gioco
+
+# [canali: Scienza e razionalità]
+# L'Avvocato dell'Atomo = https://www.youtube.com/channel/UCeieWsvQm00yw4GzBNLzJPw
+# Massimo Polidoro = https://www.youtube.com/channel/UCSKSPISyIsexROCyKZLkD9w
+# Liberi Oltre le Illusioni - STEM = https://www.youtube.com/channel/UCWKJtC_ekM-CUg3kB9-5gZw
+# Nova Lectio = https://www.youtube.com/channel/UCRCWJCFoZUvkkWzIqzfBy6g
+
+# [canali: Geopolitica]
+# ISPI - La geopolitica spiegata in modo chiaro = https://www.youtube.com/channel/UCqn5_o2qcIvKgtAexVqgGTw
+# Limes Rivista Italiana di Geopolitica = https://www.youtube.com/channel/UCgG9BnqkGnU-ouYa5eAOdEw
+# Alessandro Orsini = https://www.youtube.com/channel/UCjmDIcze56tX9eiwZ0aTIgg
+# Parabellum = https://www.youtube.com/channel/UCa2C45YKJGkXr9jQV2TYAkA
+# Aldo Giannuli = https://www.youtube.com/channel/UCT9Q1ask9Zr7yigWMHiUb3Q
+# Matteo Rubboli = https://www.youtube.com/channel/UCgXopOgwbyaxk_6MK_J9c6w
+# Alessandro Beloli = https://www.youtube.com/channel/UCA3DECAqYHJaGdfz9DC7flw
+# Lucy = https://www.youtube.com/channel/UCqgoy_2ojEKoTXmfc1XIGrQ
+
+# [canali: Attualità e politica]
+# Francesco Costa - Da Costa a Costa = https://www.youtube.com/channel/UCWIkgZzXznmBgU9uQsvjZAQ
+# GioPizzi = https://www.youtube.com/channel/UC4UGTYAV8OSRmqBjYBPFn4w
+# LiberiOltre = https://www.youtube.com/channel/UCrdEJmK5bgFte04-UF7o29Q
+# EconomiaItalia = https://www.youtube.com/channel/UCq5fU1zDj0KcdWM6wjI0jhA
+
+# [canali: Società]
+# Social Evolution = https://www.youtube.com/channel/UCyBZCV3Ra6QQk8l8ux4wkcw
+
+# [canali: Diritti e Europa]
+# Marco Cappato = https://www.youtube.com/channel/UC-6aRYyLpgp1Wyc3iVd29ig
+# UEMS - L'UE in Modo Semplice = https://www.youtube.com/channel/UCa5-GiLrEnOn6j_Xz7_QixQ
+# Lo Studio di Parsi = https://www.youtube.com/channel/UC1_WKA6R5DmaOrsVBbuII1A
+
+# [canali: Filosofia, cultura e commento]
+# Rick DuFer = https://www.youtube.com/channel/UCKoFUWEIFF33-92tBA0Cvzg
+# Matteo Saudino - BarbaSophia = https://www.youtube.com/channel/UCczAmcE87UncfJLyrfA2wUA
+# Roberto Mercadini = https://www.youtube.com/channel/UCCdoAFxCSeY94Wv2WWuNCng
+# WesaChannel = https://www.youtube.com/channel/UCaM-zH6ji5kWncFMaBBc7Yg
+# Cantina Wesa = https://www.youtube.com/channel/UC_qCxaUT6zY3yS8jgMKQfRg
+# Wesa Clip = https://www.youtube.com/channel/UCkTIzUikeTEF-RxnuvC9ktA
+# Luca Sommi = https://www.youtube.com/channel/UC1--vSJH4fHcOzfTA5500kA
+# Francesco Oggiano = https://www.youtube.com/channel/UCNCch34d8j51RXCz50Pwvmg
+
+# [canali: Tecnologia e AI]
+# Enkk = https://www.youtube.com/channel/UCvGwatHyCegYsG_y09qH1zw
+# Mr. RIP = https://www.youtube.com/channel/UCBOtZaVafz_5OmUrqJAVStQ
+# Marcello Ascani = https://www.youtube.com/channel/UCS5PaGnSnFUnrjSc80XRnqw
+# Salvatore Sanfilippo = https://www.youtube.com/channel/UCDDG9vOcmgwlslJJpCWjqOg
+# La Miniera = https://www.youtube.com/channel/UCUkJ4Ue84_RxoRwDY7cctww
+
+# [canali: Esteri e natura]
+# Mirko Paradiso = https://www.youtube.com/channel/UCYTmuzRKxTx0X0v6s6ilNjQ
+# Entropy for Life = https://www.youtube.com/channel/UCQPnCKNfzKn4OmPrx1KDWvg
+
+# [voci]
+# Massimo Polidoro
+# Alessandro Orsini
+# Aldo Giannuli
+# Matteo Rubboli
+# Alessandro Beloli
+# Francesco Costa
+# Marco Cappato
+# Roberto Mercadini
+# Matteo Saudino
+# Francesco Oggiano
+# Salvatore Sanfilippo
+# Luca Sommi
+# Vittorio Emanuele Parsi
+# Daniele Rielli
+# Rick DuFer
