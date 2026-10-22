@@ -155,16 +155,23 @@ class TestMemoria(unittest.TestCase):
         import aggregatore
         adesso = datetime.now(timezone.utc)
         voci = [self._v("nuova", 3, adesso), self._v("ieri_vista", 20, adesso), self._v("persa_ieri", 40, adesso), self._v("vecchia", 200, adesso)]
-        stato = {"ultima_esecuzione": "x", "visti": {"ieri_vista": "2026-10-21"}}
+        stato = {"ultima_esecuzione": (adesso - timedelta(hours=40)).isoformat(), "visti": {"ieri_vista": "2026-10-21"}}
         out = {v["link"] for v in aggregatore.raccogli_voci(self._esiti(voci), stato, adesso, "2026-10-22")}
         self.assertEqual(out, {"nuova", "persa_ieri"})  # recupera quanto è sfuggito, non ripete il già visto, scarta il troppo vecchio
 
     def test_rilancio_stesso_giorno(self):
         import aggregatore
         adesso = datetime.now(timezone.utc)
-        stato = {"ultima_esecuzione": "x", "visti": {"nuova": "2026-10-22"}}
+        stato = {"ultima_esecuzione": (adesso - timedelta(hours=1)).isoformat(), "visti": {"nuova": "2026-10-22"}}
         out = aggregatore.raccogli_voci(self._esiti([self._v("nuova", 3, adesso)]), stato, adesso, "2026-10-22")
         self.assertEqual(len(out), 1)  # già vista OGGI: deve comparire ancora nell'edizione di oggi
+
+    def test_niente_arretrato_dopo_esecuzione_regolare(self):  # errore: la 2ª esecuzione caricava 72 ore di arretrato
+        import aggregatore
+        adesso = datetime.now(timezone.utc)
+        stato = {"ultima_esecuzione": (adesso - timedelta(hours=24)).isoformat(), "visti": {}}
+        out = aggregatore.raccogli_voci(self._esiti([self._v("di_oggi", 5, adesso), self._v("di_2_giorni_fa", 50, adesso)]), stato, adesso, "2026-10-22")
+        self.assertEqual([v["link"] for v in out], ["di_oggi"])
 
     def test_prima_esecuzione_24_ore(self):
         import aggregatore

@@ -22,7 +22,10 @@ def raccogli_voci(esiti, stato, adesso, oggi, scartate=None):
     """Applica la finestra temporale e la memoria: nessuna uscita persa, nessuna ripetuta.
     `scartate` raccoglie le uscite senza data che non mostriamo ma che vanno ricordate come già viste."""
     ha_storia = bool(stato["ultima_esecuzione"])
-    finestra = timedelta(hours=72 if ha_storia else ORE)
+    inizio = adesso - timedelta(hours=ORE)
+    if ha_storia:  # si parte dall'ultima esecuzione (con un margine), così un giorno saltato viene recuperato ma l'arretrato non esplode
+        ultima = datetime.fromisoformat(stato["ultima_esecuzione"])
+        inizio = max(adesso - timedelta(hours=72), min(inizio, ultima - timedelta(hours=6)))
     viste, voci = set(), []
     for e in esiti:
         prima_volta = not stato.get("salute", {}).get(e.fonte.nome, {}).get("ultimo_ok")
@@ -35,7 +38,7 @@ def raccogli_voci(esiti, stato, adesso, oggi, scartate=None):
                     if scartate is not None:
                         scartate.append(v["link"])
                     continue
-            if v["date"] > adesso + timedelta(hours=6) or v["date"] < adesso - finestra:
+            if v["date"] > adesso + timedelta(hours=6) or v["date"] < inizio:
                 continue
             if ha_storia:
                 prima = stato["visti"].get(v["link"])
