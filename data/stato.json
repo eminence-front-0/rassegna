@@ -1,0 +1,470 @@
+{
+ "feedback": [],
+ "salute": {
+  "Areale": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 0,
+   "ultimo_articolo": "2026-10-17T06:00:00+02:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Che Fare": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "pagina",
+   "oggi": 18,
+   "ultimo_articolo": "2026-10-22T03:05:55.263978+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Facta": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 6,
+   "ultimo_articolo": "2026-10-21T13:10:14+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Guerre di Rete": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T09:00:00+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "ISPI Online": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "google-news",
+   "oggi": 4,
+   "ultimo_articolo": "2026-10-21T16:04:31+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Il Mulino": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "pagina",
+   "oggi": 2,
+   "ultimo_articolo": "2026-10-22T03:05:54.718653+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Il Post": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 56,
+   "ultimo_articolo": "2026-10-21T21:52:42+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Il Tascabile": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T07:24:20+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "InsideOver": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "google-news",
+   "oggi": 8,
+   "ultimo_articolo": "2026-10-21T17:25:48+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Internazionale": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 6,
+   "ultimo_articolo": "2026-10-21T12:25:45+02:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Lavoce.info": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T07:51:11+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Le Grand Continent": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 6,
+   "ultimo_articolo": "2026-10-21T16:09:58+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Limes": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 2,
+   "ultimo_articolo": "2026-10-21T11:04:00+02:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Lo Spiegone": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T07:30:00+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Lucy. Sui mondi": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T09:22:59+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Lucy. Sulla cultura": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 2,
+   "ultimo_articolo": "2026-10-21T12:52:29+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "MicroMega": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 3,
+   "ultimo_articolo": "2026-10-21T12:01:23+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Pagella Politica": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 2,
+   "ultimo_articolo": "2026-10-21T08:17:08+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Pandora Rivista": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 4,
+   "ultimo_articolo": "2026-10-21T17:10:09+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Scienza in Rete": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T06:25:00+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Slow News": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "pagina",
+   "oggi": 0,
+   "ultimo_articolo": "2026-07-13T08:50:13+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Ti Spiego il Dato": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 1,
+   "ultimo_articolo": "2026-10-21T10:34:32+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  },
+  "Valigia Blu": {
+   "errore": "",
+   "fallimenti": 0,
+   "metodo": "feed",
+   "oggi": 2,
+   "ultimo_articolo": "2026-10-21T10:43:01+00:00",
+   "ultimo_ok": "2026-10-22T05:05:40.545633+02:00"
+  }
+ },
+ "scartati": [],
+ "suggerimenti": {
+  "elenco": [
+   {
+    "citata": 0,
+    "dominio": "warontherocks.com",
+    "esempi": [
+     {
+      "link": "https://warontherocks.com/fighting-in-ethiopia-and-the-risk-of-regional-spillover/",
+      "titolo": "Fighting in Ethiopia and the Risk of Regional Spillover"
+     },
+     {
+      "link": "https://warontherocks.com/cogs-of-war/establishing-battery-supply-chain-resilience-for-drones/",
+      "titolo": "Establishing Battery Supply Chain Resilience for Drones"
+     },
+     {
+      "link": "https://warontherocks.com/tehran-is-a-different-beast-now/",
+      "titolo": "Tehran is a Different Beast Now"
+     }
+    ],
+    "feed": "https://warontherocks.com/feed",
+    "nome": "War on the Rocks",
+    "perche": "Offre analisi strategiche e approfondite su sicurezza internazionale e dinamiche militari, ideali per monitorare scenari critici come mostrato in 'Tehran is a Different Beast Now'.",
+    "tema": "Esteri e geopolitica",
+    "ultima": "2026-10-21T17:40:20+00:00",
+    "url": "https://warontherocks.com/"
+   },
+   {
+    "citata": 1,
+    "dominio": "euobserver.com",
+    "esempi": [
+     {
+      "link": "https://euobserver.com/244196/eu-prosecutors-raid-far-right-patriots-for-europe-offices-in-brussels-and-strasbourg-over-alleged-misuse-of-parliament-funds/",
+      "titolo": "EU prosecutors raid far-right Patriots for Europe offices in Brussels and Strasbourg over alleged misuse of parliament funds"
+     },
+     {
+      "link": "https://euobserver.com/244150/project-fear-didnt-work-so-why-do-we-keep-demonising-far-right-and-left-voters/",
+      "titolo": "‘Project Fear’ didn’t work, so why do we keep demonising far-right and left voters?"
+     },
+     {
+      "link": "https://euobserver.com/244118/eu-looks-to-uk-canada-and-japan-to-plug-e70bn-hole-in-funding-for-ukraines-2027-war-effort/",
+      "titolo": "EU looks to UK, Canada, and Japan to plug €70bn hole in funding for Ukraine’s 2027 war effort"
+     }
+    ],
+    "feed": "https://euobserver.com/feed/",
+    "nome": "EUobserver",
+    "perche": "Testata indipendente specializzata nelle dinamiche istituzionali e politiche di Bruxelles, con focus essenziali su temi come il supporto all'Ucraina e la trasparenza europea.",
+    "tema": "Europa e Unione Europea",
+    "ultima": "2026-10-21T20:02:50+00:00",
+    "url": "https://euobserver.com/"
+   },
+   {
+    "citata": 0,
+    "dominio": "carbonbrief.org",
+    "esempi": [
+     {
+      "link": "https://www.carbonbrief.org/revealed-expensive-gas-behind-nearly-90-of-rise-in-uk-electricity-bills",
+      "titolo": "Revealed: Expensive gas behind ‘nearly 90%’ of rise in UK electricity bills"
+     },
+     {
+      "link": "https://www.carbonbrief.org/unep-opportunity-has-been-lost-to-meet-1-5c-warming-limit-without-overshoot",
+      "titolo": "UNEP: Opportunity has ‘been lost’ to meet 1.5C warming limit without ‘overshoot’"
+     },
+     {
+      "link": "https://www.carbonbrief.org/qa-why-a-pivotal-ipcc-meeting-in-ethiopia-ended-in-profound-disappointment",
+      "titolo": "Q&A: Why a pivotal IPCC meeting in Ethiopia ended in ‘profound disappointment’"
+     }
+    ],
+    "feed": "https://www.carbonbrief.org/feed",
+    "nome": "Carbon Brief",
+    "perche": "Piattaforma di riferimento basata su dati rigorosi e reportistica scientifica su clima ed energia, perfetta per approfondire dossier complessi come i negoziati IPCC e l'impatto dei prezzi del gas.",
+    "tema": "Ambiente ed energia",
+    "ultima": "2026-10-21T11:37:55+00:00",
+    "url": "https://www.carbonbrief.org/"
+   },
+   {
+    "citata": 0,
+    "dominio": "aeon.co",
+    "esempi": [
+     {
+      "link": "https://aeon.co/videos/what-four-years-of-ceaseless-war-looks-like-to-ukrainian-civilians",
+      "titolo": "When it started to burn"
+     },
+     {
+      "link": "https://aeon.co/essays/sometimes-you-just-know-somethings-off-but-how",
+      "titolo": "How intuitions work"
+     },
+     {
+      "link": "https://aeon.co/videos/theres-nothing-inherently-good-in-the-natural-argues-bruno-latour",
+      "titolo": "A vocabulary for the future: nature"
+     }
+    ],
+    "feed": "https://aeon.co/feed.rss",
+    "nome": "Aeon | a world of ideas",
+    "perche": "Rivista di giornalismo lento dedicata a saggi filosofici, scienze umane e storia del pensiero, perfettamente allineata con l'interesse per la razionalità e le idee come in 'How intuitions work'.",
+    "tema": "Cultura e idee",
+    "ultima": "2026-10-21T10:01:00+00:00",
+    "url": "https://aeon.co/"
+   },
+   {
+    "citata": 1,
+    "dominio": "eiu.com",
+    "esempi": [
+     {
+      "link": "https://www.eiu.com/n/global-themes/blog/the-real-risk/",
+      "titolo": "Information overload: the strategic risk of monitoring everything"
+     },
+     {
+      "link": "https://www.eiu.com/n/blogs/portfolio-management-needs-ai-efficiencies-but-can-you-trust-its-answers/",
+      "titolo": "Portfolio management needs AI efficiencies—but can you trust its answers?"
+     },
+     {
+      "link": "https://www.eiu.com/n/global-themes/blog/five-risks-multinational-manufacturers/",
+      "titolo": "Managing manufacturing disruption: five supply chain and labour risks"
+     }
+    ],
+    "feed": "https://www.eiu.com/n/feed/",
+    "nome": "Economist Intelligence Unit",
+    "perche": "Fornisce analisi economiche previsionali e gestione del rischio globale basate sui dati, esplorando l'intersezione tra catene di fornitura, lavoro e impatto dell'AI.",
+    "tema": "Economia e lavoro",
+    "ultima": "2026-10-21T16:05:20+00:00",
+    "url": "https://eiu.com/"
+   },
+   {
+    "citata": 1,
+    "dominio": "voxeurop.eu",
+    "esempi": [
+     {
+      "link": "https://voxeurop.eu/en/france-in-flames-protests/",
+      "titolo": "France in flames"
+     },
+     {
+      "link": "https://voxeurop.eu/en/indonesia-forests-volkswagen-electric-cars-dirty-nickel-trail/",
+      "titolo": "From Indonesia’s hallowed forests to Volkswagen’s electric cars: the dirty nickel trail"
+     },
+     {
+      "link": "https://voxeurop.eu/en/ukraine-life-russian-occupation-people-survive-oleshky-hola-prystan/",
+      "titolo": "Life under Russian occupation: how people survive and die in border cities turned into a kill zone"
+     }
+    ],
+    "feed": "https://voxeurop.eu/feed",
+    "nome": "Voxeurop",
+    "perche": "Progetto giornalistico transnazionale e indipendente che affronta questioni sociali, diritti e inchieste europee con un approccio lento e approfondito.",
+    "tema": "Diritti e società",
+    "ultima": "2026-10-20T14:06:09+00:00",
+    "url": "https://voxeurop.eu/"
+   }
+  ],
+  "generato": "2026-10-22T03:08:23.551429+00:00"
+ },
+ "ultima_esecuzione": "2026-10-22T05:05:40.545633+02:00",
+ "visti": {
+  "https://it.insideover.com/economia/una-nuova-crisi-del-debito-europeo-lo-shock-dei-mercati-travolge-la-francia.html": "2026-10-22",
+  "https://it.insideover.com/guerra/witkoff-a-mosca-trump-apre-a-un-trilaterale-con-putin-e-xi.html/amp": "2026-10-22",
+  "https://it.insideover.com/media-e-potere/i-maranza-e-le-vetrine-lultimo-alibi-di-un-sistema-che-si-regge-sulle-balle.html": "2026-10-22",
+  "https://it.insideover.com/media-e-potere/scioperi-proteste-e-manifestazioni-il-comodo-alibi-della-guerra-ibrida-che-non-ce.html": "2026-10-22",
+  "https://it.insideover.com/politica/la-siria-riallaccia-i-rapporti-con-la-libia-e-soprattutto-con-haftar.html": "2026-10-22",
+  "https://it.insideover.com/politica/macron-a-abu-dhabi-per-il-gasolio-e-intanto-parigi-e-in-coprifuoco.html": "2026-10-22",
+  "https://it.insideover.com/politica/milei-in-spagna-attacca-sanchez-sinistroide-lui-replica-ne-vado-fiero-e-dico-no-alla-guerra.html": "2026-10-22",
+  "https://it.insideover.com/politica/ucraina-nucleare-e-commercio-tutti-i-dubbi-di-xi-jinping-sullincontro-con-putin-e-trump.html": "2026-10-22",
+  "https://lavoce.info/archives/114467/regolare-gli-affitti-brevi-non-basta-a-risolvere-la-questione-della-casa/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/21/dopo-le-elezioni-di-midterm-la-politica-internazionale-di-trump-diventera-ancora-piu-folle/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/21/i-flussi-di-petrolio-dal-golfo-persico-hanno-superato-i-livelli-prebellici/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/21/il-pianeta-sta-bruciando-i-media-distolgono-lo-sguardo/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/21/in-nove-mesi-si-sono-registrati-piu-transiti-sulla-rotta-marittima-del-nord-che-nellintero-anno-2025/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/21/la-guerra-in-ucraina-si-estende-allo-spazio/": "2026-10-22",
+  "https://legrandcontinent.eu/it/2026/10/21/le-front-digital-des-emeutes-en-france-2/": "2026-10-22",
+  "https://lospiegone.com/2026/10/21/come-erdogan-sta-cambiando-immaginario-politico-turco/": "2026-10-22",
+  "https://lucysuimondi.com/abbiamo-messo-dei-neuroni-umani-dentro-un-computer-che-cosa-abbiamo-creato/": "2026-10-22",
+  "https://lucysullacultura.com/chi-puo-permettersi-di-non-parlare-di-se-intervista-a-claudia-durastanti/": "2026-10-22",
+  "https://lucysullacultura.com/lavanzata-delle-chiese-pentecostali-tra-i-giovani-italiani/": "2026-10-22",
+  "https://pagellapolitica.it/articoli/nuovo-decreto-governo-manifestazioni-cosa-prevede": "2026-10-22",
+  "https://pagellapolitica.it/articoli/promessometro-promesse-quattro-anni-governo-meloni": "2026-10-22",
+  "https://www.che-fare.com/agenda/non-ancora-e-intanto": "2026-10-22",
+  "https://www.che-fare.com/agenda/reimparare-a-collaborare-2": "2026-10-22",
+  "https://www.che-fare.com/agenda/strati-della-cultura-2026": "2026-10-22",
+  "https://www.che-fare.com/articoli/cultura-senza-spazio": "2026-10-22",
+  "https://www.che-fare.com/articoli/la-lettura-profonda-come-infrastruttura": "2026-10-22",
+  "https://www.che-fare.com/articoli/linvenzione-delle-aree-interne": "2026-10-22",
+  "https://www.che-fare.com/articoli/quando-la-rete-crea-futuro": "2026-10-22",
+  "https://www.che-fare.com/cosa-facciamo/area/rigenerazioni-e-territori": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/ambiente-e-giustizia-climatica ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/che-cose-la-progettazione-culturale ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/diritti-e-disuguaglianze ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/diritto-alla-citta ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/le-nuove-istituzioni-della-cultura ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/le-nuove-professioni-della-cultura ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/media-transizione-digitale ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/oltre-linnovazione-sociale ": "2026-10-22",
+  "https://www.che-fare.com/percorsi-tematici/partecipazione-attiva-e-democrazia ": "2026-10-22",
+  "https://www.che-fare.com/progetti/marea-questa-storia-e-di-tutt": "2026-10-22",
+  "https://www.facta.news/antibufale/foto-scioperi-trasportatori-sud-italia": "2026-10-22",
+  "https://www.facta.news/antibufale/negozio-nike-vandalizzato": "2026-10-22",
+  "https://www.facta.news/antibufale/pantera-rosa-lancia-molotov": "2026-10-22",
+  "https://www.facta.news/antibufale/proteste-studentesche-torre-eiffel-francia": "2026-10-22",
+  "https://www.facta.news/antibufale/video-bandiere-palestinesi-torre-eiffel": "2026-10-22",
+  "https://www.facta.news/antibufale/video-di-giovane-francese-che-piange-dopo-una-condanna-in-tribunale": "2026-10-22",
+  "https://www.guerredirete.it/quando-lattacco-cyber-diventa-una-minaccia-fisica/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/500-soldati-milano-cosa-faranno-esercito/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/albania-rama-proteste-studenti/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/autotrasporto-sud-proteste-supermercati-trasporto-carburanti/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/avallone-vecchi-abbienti-e-giovani-attraenti/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/bismillah-cest-les-tenebres-francia-spiegazione/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/burkina-faso-pena-di-morte/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/cancellazione-carnet-smart-trenitalia/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/commissione-europea-indagine-booking-frodi/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/dazi-trump-canada-detroit-windsor/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/editore-boreal-intelligenza-artificale-romanzo-thelyson-orelien/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/festa-cinema-roma-inosservata/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/helen-haines-amputazione-gambe-australia/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/hormuz-ripresa-esportazioni-petrolio/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/houthi-yemen-attacco-esercito-yemen/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/intelligenza-artificiale-analisi-facce-cancro/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/internet-siti-offline-difetti-linguaggio-programmazione-php/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/kvaratskhelia-infortunio-rotto-crociato/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/le-prime-pagine-di-oggi-4710/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/lennon-tragedia-true-crime-libro/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/liechtenstein-principe-veto-legge-aborto/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/massacri-civili-sudan-rsf-esercito/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/meme-dibattito-lula-bolsonaro-brasile/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/mercato-vittoria-protesta-autotrasportatori-sicilia-frutta-verdura/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/mercoledi-21-ottobre-3/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/meta-dovra-pagare-25-miliardi-di-dollari-per-lo-scandalo-cambridge-analytica/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/milano-riot/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/nba-prima-serata-notte-cose-successo-paul-george-knicks-banner-lebron-james-philadelphia-76ers-spurs-okc-wembanyama-contro-shai-gilgeous-alexander/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/netanyahu-rinascita-elezioni-israele/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/netflix-ristrutturazione/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/papa-non-necessita-altre-terapie/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/peanuts-2026-ottobre-21/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/piantedosi-disordini-milano/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/polonia-leggi-aborto/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/portogallo-proteste-casa-continuano/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/psg-barcellona-miglior-squadra-europa-gol/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/rapper-opinioni-disordini-milano-marracash-fedez/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/regno-unito-approvazione-sviluppo-giacimento-jackdaw/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/russia-disposta-nuovi-colloqui-ucraina/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/satellite-russo-avvicinamento-ucraina/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/shakhtar-donetsk-guerra-ucraina-partite-europa-londra-inter-trasferta/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/squalo-bloccato-canale-busan-corea-del-sud/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/starlink-ucraina-limitazioni-elon-musk/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/stati-uniti-ritiro-arabia-saudita-houthi/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/stephen-hubbard-russia-liberato-cittadino-statunitense/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/supermercati-carenze-prodotti-proteste-autotrasportatori-sud/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/tesla-space-x-elon-musk-possibile-fusione/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/tony-effe-profilo-tonycocazero-sport-ciclismo-corsa/": "2026-10-22",
+  "https://www.ilpost.it/2026/10/21/universita-federico-ii-lezioni-online-mancanza-carburante/": "2026-10-22",
+  "https://www.ilpost.it/episodes/ep-1310-la-rabbia-giovane-e-le-altre-storie-di-oggi/": "2026-10-22",
+  "https://www.ilpost.it/episodes/ep-349-mezzi-molto-pesanti/": "2026-10-22",
+  "https://www.ilpost.it/episodes/ep-511-ragazzini-che-odiano-protestano-distruggono/": "2026-10-22",
+  "https://www.ilpost.it/episodes/lottobre-ungherese/": "2026-10-22",
+  "https://www.ilpost.it/episodes/netanyahu-si-gioca-tutto-con-anna-momigliano/": "2026-10-22",
+  "https://www.ilpost.it/episodes/siamo-soli-nello-spazio-o-forse-stiamo-per-fallire-la-teoria-del-grande-filtro-con-amedeo-balbi/": "2026-10-22",
+  "https://www.ilpost.it/flashes/como-united-highlights-champions-league/": "2026-10-22",
+  "https://www.ilpost.it/flashes/lega-maranza/": "2026-10-22",
+  "https://www.iltascabile.com/linguaggi/autori-masticati/": "2026-10-22",
+  "https://www.internazionale.it/notizie/alberto-puliafito/2026/10/21/i-data-center-e-i-bot-russi": "2026-10-22",
+  "https://www.internazionale.it/notizie/alessandro-lubello/2026/10/21/i-primi-scricchiolii-dell-intelligenza-artificiale": "2026-10-22",
+  "https://www.internazionale.it/notizie/alessio-marchionna/2026/10/21/trump-musk-doge": "2026-10-22",
+  "https://www.internazionale.it/opinione/pierre-haski/2026/10/21/europa-minaccia-cina-russia": "2026-10-22",
+  "https://www.internazionale.it/redirect/2026/10/21/la-pietra-seta-libri-recensio": "2026-10-22",
+  "https://www.internazionale.it/video/2026/10/21/a-dieci-anni-dall-terremoto-in-italia-centrale-la-ricostruzione-e-lontana": "2026-10-22",
+  "https://www.ispionline.it/it/evento/gen-z-in-piazza-leuropa-ha-tradito-i-giovani": "2026-10-22",
+  "https://www.ispionline.it/it/pubblicazione/la-geopolitica-della-seconda-ondata-di-decarbonizzazione-europea-249246": "2026-10-22",
+  "https://www.ispionline.it/it/pubblicazione/sudan-anatomia-di-una-guerra-di-droni-249423": "2026-10-22",
+  "https://www.ispionline.it/it/pubblicazione/usa-ue-frattura-sulla-russia-249435": "2026-10-22",
+  "https://www.limesonline.com/articoli/stagflazione-inflazione-crisi-energetica-costi-sociali-lavoratori-neoliberismo-keynesismo-22951385/": "2026-10-22",
+  "https://www.limesonline.com/rubriche/il-mondo-oggi/ucraina-negoziati-witkoff-russia-accordo-turchia-libia-giappone-malaysia-regno-unito-typhoon-arabia-saudita-taiwan-cina-22959477/": "2026-10-22",
+  "https://www.micromega.net/decreto-sicurezza-il-governo-moltiplica-i-reati-e-restringe-le-liberta/": "2026-10-22",
+  "https://www.micromega.net/la-minoranza-araba-e-i-limiti-della-democrazia-israeliana/": "2026-10-22",
+  "https://www.micromega.net/mercoledi-4-novembre-a-torino-tecnoligarchi-allassalto-della-democrazia/": "2026-10-22",
+  "https://www.pandorarivista.it/articoli/dalle-pietre-alle-stelle-una-storia-logistica-dell-umanita-di-cesare-alemanni/": "2026-10-22",
+  "https://www.pandorarivista.it/articoli/la-democrazia-oltre-la-crisi-della-rappresentanza-intervista-a-nadia-urbinati/": "2026-10-22",
+  "https://www.pandorarivista.it/articoli/la-disuguaglianza-oltre-i-luoghi-comuni-intervista-a-maurizio-franzini/": "2026-10-22",
+  "https://www.pandorarivista.it/articoli/le-tenebre-non-sono-il-nostro-destino-intervista-ad-asma-mhalla/": "2026-10-22",
+  "https://www.rivistailmulino.it/a/uno-sguardo-sul-brasile": "2026-10-22",
+  "https://www.rivistailmulino.it/speciale/a-110-anni-dalla-nascita-di-aldo-moro": "2026-10-22",
+  "https://www.scienzainrete.it/articolo/definisci-malattia/stefano-cagliano/2026-10-21": "2026-10-22",
+  "https://www.tispiegoildato.it/p/misurare-la-cura-collettiva-e-possibile": "2026-10-22",
+  "https://www.valigiablu.it/droni-guerra-ibrida-mar-nero-russia-nato/": "2026-10-22",
+  "https://www.valigiablu.it/perche-protestano-autotrasportatori-agricoltori/": "2026-10-22"
+ }
+}
